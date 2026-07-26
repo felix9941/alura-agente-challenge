@@ -32,7 +32,7 @@ VECTORSTORE_PATH = BASE_DIR / "vectorstore"
 # LLM
 LLM_MODEL = "gemini-2.5-flash"
 # Embeddings
-EMBEDDING_MODEL = "models/text-embedding-004"
+EMBEDDING_MODEL = "models/gemini-embedding-001"
 # Text Splitter
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
