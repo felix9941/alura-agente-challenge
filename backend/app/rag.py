@@ -54,9 +54,21 @@ class RAGService:
         # Consultar Gemini
         response = self.llm.invoke(prompt)
 
+        #Convertir la respuesta a texto plano
+        if isinstance(response.content, str):
+            answer = response.content
+        elif isinstance(response.content, list):
+            answer = "\n".join(
+                block.get("text", "")
+                for block in response.content
+                if isinstance(block, dict)
+            )
+        else:
+            answer = str(response.content)
+
         return {
             "question": question,
-            "answer": response.content,
+            "answer": answer,
             "sources": [
                 doc.metadata
                 for doc in documents

@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown";
 import "../styles/Message.css";
 
 function Message({ sender, text }) {
@@ -8,7 +9,9 @@ function Message({ sender, text }) {
           {sender === "user" ? "👤 Tú" : "🤖 CloudFlow Assistant"}
         </span>
 
-        <p className="message-text">{text}</p>
+        <div className="message-text">
+          <ReactMarkdown>{text}</ReactMarkdown>
+        </div>
       </div>
     </div>
   );

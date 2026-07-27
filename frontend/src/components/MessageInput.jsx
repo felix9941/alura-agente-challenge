@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import "../styles/MessageInput.css";
 
 function MessageInput({ onSend, loading }) {
@@ -18,6 +17,7 @@ function MessageInput({ onSend, loading }) {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
+
       handleSubmit();
     }
   };
