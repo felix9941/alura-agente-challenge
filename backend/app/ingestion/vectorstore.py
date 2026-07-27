@@ -7,20 +7,18 @@ Este módulo crea y administra la base vectorial utilizando ChromaDB.
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
-from app.config import VECTORSTORE_PATH
+from app.config import VECTORSTORE_PATH, TOP_K_RESULTS
 from app.ingestion.embeddings import EmbeddingService
 
 
 class VectorStoreService:
     """
-    Servicio encargado de crear y acceder a la base vectorial.
+    Servicio encargado de crear, cargar y consultar la base vectorial.
     """
 
     def __init__(self):
 
-        self.embedding_function = (
-            EmbeddingService().get_embeddings()
-        )
+        self.embedding_function = EmbeddingService().get_embeddings()
 
         self.persist_directory = str(VECTORSTORE_PATH)
 
@@ -29,7 +27,7 @@ class VectorStoreService:
         documents: list[Document],
     ) -> Chroma:
         """
-        Crea una nueva base vectorial a partir de una lista de documentos.
+        Crea una nueva base vectorial.
 
         Parameters
         ----------
@@ -65,4 +63,31 @@ class VectorStoreService:
         return Chroma(
             persist_directory=self.persist_directory,
             embedding_function=self.embedding_function,
+        )
+
+    def get_retriever(
+        self,
+        search_kwargs: dict | None = None,
+    ):
+        """
+        Devuelve un retriever para realizar búsquedas semánticas.
+
+        Parameters
+        ----------
+        search_kwargs : dict | None
+
+        Returns
+        -------
+        VectorStoreRetriever
+        """
+
+        if search_kwargs is None:
+            search_kwargs = {
+                "k": TOP_K_RESULTS
+            }
+
+        vectorstore = self.load_vectorstore()
+
+        return vectorstore.as_retriever(
+            search_kwargs=search_kwargs
         )
