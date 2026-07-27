@@ -9,11 +9,22 @@ from pydantic import BaseModel
 
 from app.services.qa_service import QAService
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(
     title="Alura Agent API",
     version="1.0.0",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 qa = QAService()
 
 

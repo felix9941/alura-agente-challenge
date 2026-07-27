@@ -30,7 +30,7 @@ DATA_PATH = BASE_DIR / "data"
 VECTORSTORE_PATH = BASE_DIR / "vectorstore"
 
 # LLM
-LLM_MODEL = "gemini-2.5-flash"
+LLM_MODEL = "gemini-flash-latest"
 # Embeddings
 EMBEDDING_MODEL = "models/gemini-embedding-001"
 # Text Splitter
