@@ -1,14 +1,54 @@
+"""
+FastAPI Application
+
+Expone la API del agente RAG.
+"""
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from app.rag import RAGService
 
-app = FastAPI(title="Alura Agent API")
-rag_service = RAGService()
+from app.services.qa_service import QAService
 
-class Query(BaseModel):
-    pregunta: str
+app = FastAPI(
+    title="Alura Agent API",
+    version="1.0.0",
+)
+
+qa = QAService()
+
+
+class QuestionRequest(BaseModel):
+    question: str
+
+
+@app.get("/")
+def root():
+
+    return {
+        "message": "Alura Agent API funcionando correctamente."
+    }
+
+
+@app.get("/health")
+def health():
+
+    return {
+        "status": "ok"
+    }
+
 
 @app.post("/chat")
-async def chat_endpoint(query: Query):
-    respuesta = rag_service.answer_question(query.pregunta)
-    return {"respuesta": respuesta}
+def chat(request: QuestionRequest):
+
+    try:
+
+        response = qa.ask(request.question)
+
+        return response
+
+    except Exception as e:
+
+        raise HTTPException(
+            status_code=500,
+            detail=str(e),
+        )
