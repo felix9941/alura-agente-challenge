@@ -4,7 +4,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 30000,
+  timeout: 400000,
 });
 /**
  * Envía una pregunta al agente RAG.

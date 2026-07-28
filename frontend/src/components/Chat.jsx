@@ -52,11 +52,6 @@ function Chat() {
 
     try {
       const response = await askQuestion(question);
-      console.log("=================================");
-      console.log(response);
-      console.log(typeof response.answer);
-      console.log(response.answer);
-      console.log("=================================");
 
       setMessages((prev) => [
         ...prev,
