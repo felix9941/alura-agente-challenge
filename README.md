@@ -234,12 +234,12 @@ soporte técnico 24/7 y un gerente de cuenta dedicado.
 
 # ☁ Deploy
 
-El proyecto fue desplegado utilizando Oracle Cloud Infrastructure (OCI).
+El proyecto fue desplegado utilizando Google Cloud Run.
 
 URL
 
 ```
-https://xxxxxxxxxxxx
+https://alura-frontend-693674908371.southamerica-east1.run.app
 ```
 
 ---
@@ -257,11 +257,9 @@ https://xxxxxxxxxxxx
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 
-## OCI
+## Google Cloud Run
 
-_(Agregar captura del despliegue.)_
-
----
+![alt text](image-6.png)
 
 # 👨‍💻 Autor
 
